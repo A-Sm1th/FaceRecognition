@@ -1,0 +1,14 @@
+#image {
+    height: 100%;
+    width: 200px;
+    padding: 2rem;
+}
+
+.bounding-box {
+    position: absolute;
+    box-shadow: 0 0 0 3px #251a8a inset;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}
