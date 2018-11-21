@@ -15,7 +15,7 @@ class Signin extends React.Component {
     onPasswordChange = (event) => {
         this.setState({signInPassword: event.target.value})
     }
-    onSubmitSignin = () => {
+    onSubmitSignIn = () => {
         fetch('http://localhost:3030/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -25,12 +25,12 @@ class Signin extends React.Component {
             })
         })
             .then(response => response.json())
-            .then(data => {
-                if(data === 'success') {
+            .then(user => {
+                if(user.id) {
+                    this.props.loadUser(user)
                     this.props.onRouteChange('home');
                 }
             })
-        this.props.onRouteChange('home');
     }
     render () {
         const { onRouteChange } = this.props;
@@ -43,25 +43,25 @@ class Signin extends React.Component {
                         <div className="mt3">
                             <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                             <input 
-                            onChange={this.onEmailChange}
                             className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                             type="email" 
                             name="email-address"  
-                            id="email-address" />
+                            id="email-address"
+                            onChange={this.onEmailChange}/>
                         </div>
                         <div className="mv3">
                             <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                             <input 
-                            onChange={this.onPasswordChange}
                             className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                             type="password" 
                             name="password"  
-                            id="password" />
+                            id="password"
+                            onChange={this.onPasswordChange}/>
                         </div>
                         <label className="pa0 ma0 lh-copy f6 pointer"><input type="checkbox" /> Remember me</label>
-                        <div >
+                        <div className="">
                         <input 
-                        onClick={this.onSubmitSignin}
+                        onClick={this.onSubmitSignIn}
                         className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                         type="submit" 
                         value="Sign in" />
